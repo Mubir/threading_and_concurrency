@@ -23,7 +23,9 @@ public class UseCompatibleFuture {
         // so need to use it in try-catch
         Supplier<Quotation> firstQ = () -> {
             try {
+                System.out.println("Stating -- pausing thread 1");
                 Thread.sleep(rand.nextInt(80, 120));
+                System.out.println("Resuming thread 1");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -31,7 +33,9 @@ public class UseCompatibleFuture {
         };
         Supplier<Quotation> secondQ = () -> {
             try {
+                System.out.println("Stating -- pausing thread 2");
                 Thread.sleep(rand.nextInt(80, 120));
+                System.out.println("Resuming thread 2");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -39,7 +43,9 @@ public class UseCompatibleFuture {
         };
         Supplier<Quotation> thirdQ = () -> {
             try {
+                System.out.println("Stating -- pausing thread 3");
                 Thread.sleep(rand.nextInt(80, 120));
+                System.out.println("Resuming thread 3");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -57,7 +63,9 @@ public class UseCompatibleFuture {
         List<Quotation> listOfQuotation = new ArrayList<>();
         for (CompletableFuture<Quotation> quotationFuture : listOfFuture) {
             // no try catch diff with .get()
+            System.out.println("joining start ");
             Quotation q = quotationFuture.join();
+            System.out.println("joining end ");
             listOfQuotation.add(q);
         }
         Quotation fastestQ = listOfQuotation.stream()

@@ -17,3 +17,6 @@ Asynchronous+Concurrent:
 Running blocking code in an another thread to avoid blocking the the running of main thread.
 and this another thread could run 'normally' with a result / run 'exceptionally' with a exception
 and need to fetch the result in main thread.
+
+future.get() is blocking code(it blocks the main thread not the calling thread.)
+and blocking thread is expensive.
