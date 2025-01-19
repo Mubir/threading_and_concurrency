@@ -2,6 +2,20 @@ package org.prac.dataasync;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * When you use methods like thenApply(), thenAccept(), or thenRun() on a CompletableFuture,
+ * they are non-blocking. Instead of waiting for the result, these methods register a callback
+ * to be executed asynchronously once the task is complete. The current thread
+ * (e.g., the main thread) continues running and is not blocked.
+ * <p>
+ * How does this resolve the blocking issue?
+ * Instead of calling get() or join(), which stops the current thread, we register callbacks
+ * like thenApply() or thenAccept(). These methods attach a continuation to the CompletableFuture.
+ * The main thread does not stop and can continue executing other tasks, improving responsiveness
+ * and performance.
+ * When the task completes in the background (on another thread), the registered callbacks
+ * are executed asynchronously.
+ */
 public class CompetableFutureResolvingBlockingMainThread {
     public static void main(String[] args) {
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {

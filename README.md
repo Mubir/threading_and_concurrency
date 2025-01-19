@@ -20,3 +20,8 @@ and need to fetch the result in main thread.
 
 future.get() is blocking code(it blocks the main thread not the calling thread.)
 and blocking thread is expensive.
+Key principle:
+    Do not block yr main thread.
+    - divide processing in small operations.
+    - chain them with the completionStage api.
+    - on task can trigger as many tasks as u need.
