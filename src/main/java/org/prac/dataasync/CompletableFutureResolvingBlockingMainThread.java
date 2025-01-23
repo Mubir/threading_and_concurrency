@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
  * When the task completes in the background (on another thread), the registered callbacks
  * are executed asynchronously.
  */
-public class CompetableFutureResolvingBlockingMainThread {
+public class CompletableFutureResolvingBlockingMainThread {
     public static void main(String[] args) {
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             try {
