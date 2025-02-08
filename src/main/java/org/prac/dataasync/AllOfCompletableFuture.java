@@ -22,6 +22,7 @@ public class AllOfCompletableFuture {
             cFutures.add(currFuture);
         }
 
+        // allOf only take CF of same type.
         CompletableFuture<Void> allCpFuture
                 = CompletableFuture.allOf(cFutures.toArray(CompletableFuture[]::new));
 
@@ -30,7 +31,8 @@ public class AllOfCompletableFuture {
                         .map(CompletableFuture::join)
                         .min(Comparator.comparing(quotation -> quotation.duration))
                         .orElseThrow()
-        ).join();
+        ).join(); // this is not blocking as its depends on the completableFuture in all of
+        // and we know that all CF passed to allof.thenApply is already done.
         System.out.println("Ichiban:: " + bestQ);
     }
 
